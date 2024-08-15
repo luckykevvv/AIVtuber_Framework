@@ -7,7 +7,7 @@
 1. **克隆仓库**
 
    ```bash
-   git clone https://github.com/yourusername/desktop-pet-framework.git
+   git clone https://github.com/luckykevvv/Desktop_Pet_Structure.git
 
 
 ## 许可证
