@@ -2,104 +2,15 @@ import package.live2d.v3 as live2d
 import sys
 from PyQt5.QtGui import QMouseEvent, QCursor
 from PyQt5.QtCore import QTimerEvent, Qt, QPoint
-from PyQt5.QtWidgets import QApplication, QOpenGLWidget, QMenu
+from PyQt5.QtWidgets import *
 from OpenGL.GL import *
 
-class Win(QOpenGLWidget):
-    model: live2d.LAppModel
-    
-    def __init__(self) -> None:
-        super().__init__()
-        self.a = 0
-        self.model = None 
-        self.resize(500, 1000)
-        #frame less and transparent
-        self.setWindowFlags(Qt.FramelessWindowHint | Qt.Tool | Qt.WindowStaysOnTopHint)
-        self.setAttribute(Qt.WA_TranslucentBackground)
-        self.setMouseTracking(True)
-        self.setAttribute(Qt.WA_TransparentForMouseEvents)
-        
-        self.dragging = False
-        self.offset = QPoint()
-        
-        self.createContextMenu()
-        
-    def createContextMenu(self) -> None:
-        """Create the context menu with the necessary actions."""
-        self.context_menu = QMenu(self)
-        close_action = self.context_menu.addAction("Close")
-        close_action.triggered.connect(self.endWindow)
-    
-    def endWindow(self):
-        self.killTimer(self.timer_id)
-        live2d.dispose()
-        QApplication.quit()
+import show_model
 
-    
-    def showContextMenu(self, position: QPoint) -> None:
-        """Show the context menu at the given position."""
-        self.context_menu.exec_(position)
-    
-    def initializeGL(self):
-        self.makeCurrent()
-        
-        # initialize Glew
-        live2d.glewInit()    
-        # set the OPENGL
-        live2d.setGLProperties()
+live2d.init()
 
-        #initialize the model
-        self.model = live2d.LAppModel()
-        self.model.LoadModelJson("./live_2d_model/hiyori_free_en/runtime/hiyori_free_t08.model3.json")
-        
-        self.model.SetLipSyncN(5)
-        self.update()
-        
-        self.timer_id =self.startTimer(int(1000 / 60))
-
-    def resizeGL(self, w, h): 
-        self.model.Resize(w, h)
-
-    def paintGL(self) -> None:
-        live2d.clearBuffer()
-        self.model.Update()
-        
-    def timerEvent(self,event):
-        self.update()    
-
-    def mousePressEvent(self, event: QMouseEvent) -> None:
-        self.model.Touch(event.pos().x(), event.pos().y())
-        
-        if event.button() == Qt.LeftButton:
-            #recording the position
-            self.dragging = True
-            self.offset = event.pos()
-            
-        elif event.button() == Qt.RightButton:
-            # Show context menu on right-click
-            self.showContextMenu(QCursor.pos())
-
-    def mouseMoveEvent(self, event: QMouseEvent) -> None:
-        self.model.Drag(event.pos().x(), event.pos().y())
-        
-        if self.dragging:
-            #start moving
-            new_position = self.pos() + (event.globalPos() - self.offset - self.pos())
-            self.move(new_position)
-            self.offset = event.globalPos() - self.pos()
-        
-    def mouseReleaseEvent(self, event):
-        if event.button() == Qt.LeftButton:
-            self.dragging = False
-            
-if __name__ == '__main__':
-    import sys
-    live2d.init()
-
-    app = QApplication(sys.argv)
-    win = Win()
-    win.show()
-    #win.showFullScreen()
-    sys.exit(app.exec_())
-
-    live2d.dispose()
+app = QApplication(sys.argv)
+win = show_model.Win()
+win.show()
+#win.showFullScreen()
+sys.exit(app.exec_())
