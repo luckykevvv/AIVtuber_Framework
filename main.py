@@ -1,8 +1,8 @@
 import package.live2d.v3 as live2d
 import sys
-from PyQt5.QtGui import QMouseEvent
+from PyQt5.QtGui import QMouseEvent, QCursor
 from PyQt5.QtCore import QTimerEvent, Qt, QPoint
-from PyQt5.QtWidgets import QApplication, QOpenGLWidget
+from PyQt5.QtWidgets import QApplication, QOpenGLWidget, QMenu
 from OpenGL.GL import *
 
 class Win(QOpenGLWidget):
@@ -14,13 +14,31 @@ class Win(QOpenGLWidget):
         self.model = None 
         self.resize(500, 1000)
         #frame less and transparent
-        self.setWindowFlags(Qt.FramelessWindowHint | Qt.Tool)
+        self.setWindowFlags(Qt.FramelessWindowHint | Qt.Tool | Qt.WindowStaysOnTopHint)
         self.setAttribute(Qt.WA_TranslucentBackground)
         self.setMouseTracking(True)
+        self.setAttribute(Qt.WA_TransparentForMouseEvents)
         
         self.dragging = False
         self.offset = QPoint()
+        
+        self.createContextMenu()
+        
+    def createContextMenu(self) -> None:
+        """Create the context menu with the necessary actions."""
+        self.context_menu = QMenu(self)
+        close_action = self.context_menu.addAction("Close")
+        close_action.triggered.connect(self.endWindow)
     
+    def endWindow(self):
+        self.killTimer(self.timer_id)
+        live2d.dispose()
+        QApplication.quit()
+
+    
+    def showContextMenu(self, position: QPoint) -> None:
+        """Show the context menu at the given position."""
+        self.context_menu.exec_(position)
     
     def initializeGL(self):
         self.makeCurrent()
@@ -37,7 +55,7 @@ class Win(QOpenGLWidget):
         self.model.SetLipSyncN(5)
         self.update()
         
-        self.startTimer(int(1000 / 60))
+        self.timer_id =self.startTimer(int(1000 / 60))
 
     def resizeGL(self, w, h): 
         self.model.Resize(w, h)
@@ -56,6 +74,10 @@ class Win(QOpenGLWidget):
             #recording the position
             self.dragging = True
             self.offset = event.pos()
+            
+        elif event.button() == Qt.RightButton:
+            # Show context menu on right-click
+            self.showContextMenu(QCursor.pos())
 
     def mouseMoveEvent(self, event: QMouseEvent) -> None:
         self.model.Drag(event.pos().x(), event.pos().y())
@@ -77,6 +99,7 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     win = Win()
     win.show()
+    #win.showFullScreen()
     sys.exit(app.exec_())
 
     live2d.dispose()
