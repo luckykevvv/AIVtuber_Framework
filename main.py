@@ -18,5 +18,5 @@ text_window.show()
 
 show_text = ShowText()
 show_text.show()
-show_text.updateText("Hello, I'm open source sama")
+show_text.updateText("Hello, I'm Open-Source Sama")
 sys.exit(app.exec_())
