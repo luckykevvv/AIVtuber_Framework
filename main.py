@@ -5,12 +5,18 @@ from PyQt5.QtCore import QTimerEvent, Qt, QPoint
 from PyQt5.QtWidgets import *
 from OpenGL.GL import *
 
-import show_model
-
+from show_model import ShowModel
+from text_window import TextWindow
+from show_text import ShowText
 live2d.init()
 
 app = QApplication(sys.argv)
-win = show_model.Win()
-win.show()
-#win.showFullScreen()
+show_model = ShowModel()
+show_model.show()
+text_window = TextWindow()
+text_window.show()
+
+show_text = ShowText()
+show_text.show()
+show_text.updateText("Hello, I'm open source sama")
 sys.exit(app.exec_())

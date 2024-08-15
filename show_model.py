@@ -4,7 +4,7 @@ from PyQt5.QtCore import QTimerEvent, Qt, QPoint
 from PyQt5.QtWidgets import *
 from OpenGL.GL import *
 
-class Win(QOpenGLWidget):
+class ShowModel(QOpenGLWidget):
     model: live2d.LAppModel
     
     def __init__(self) -> None:
