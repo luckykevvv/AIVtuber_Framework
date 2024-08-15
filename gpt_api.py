@@ -9,31 +9,28 @@ def get_api_key():
 
 openai.api_key = get_api_key()
 
-# Initialize the conversation with the vtuber role
-message_init = [{"role": "system", "content": "You are a vtuber called open-source sama."}]
-messages = message_init
+class ChatGPT():
+    def __init__(self) -> None:
+        self.message_init = [{"role": "system", "content": "You are a vtuber called open-source sama."}]
+        self.messages = self.message_init
 
-def ask_gpt(messages):
-    rsp = openai.chat.completions.create(
-        model="gpt-4o-mini",  # Ensure this is the correct model identifier
-        messages=messages
-    )
-    return rsp.choices[0].message.content
+    def ask_gpt(self):
+        rsp = openai.chat.completions.create(
+            model="gpt-4o-mini",  # Ensure this is the correct model identifier
+            messages=self.messages
+        )
+        return rsp.choices[0].message.content
 
-while True:
-    # Limit the conversation history
-    if len(messages) >= 5:
-        print("******************************")
-        print("*****maximum conversation*****")
-        print("******************************")
-        messages = messages[-4:]  # Keep only the last 10 messages
+    def asking(self, question):
+        if len(self.messages) >= 11:
+            print("******************************")
+            print("*****maximum conversation*****")
+            print("******************************")
+            self.messages=self.message_init
 
-    # Ask the user for input
-    ask = input('Ask: ')
-    
-    # Append the user's question and get the response
-    messages.append({"role": "user", "content": ask})
-    print(messages)
-    answer = ask_gpt(messages)
-    print(f"【ChatGPT】{answer}")
-    messages.append({"role": "assistant", "content": answer})
+        ask = question
+        self.messages.append({"role": "user", "content": ask})
+        
+        answer = self.ask_gpt()
+        self.messages.append({"role": "assistant", "content": answer})
+        return answer

@@ -84,6 +84,11 @@ class TextWindow(QWidget):
         print(f"Saved text: {self.saved_text}")  # Print the saved text for verification
         self.text_input.clear()  # Clear the text box
         
+    def get_text(self):
+        ret=self.saved_text
+        self.saved_text=None
+        return ret
+        
     def eventFilter(self, obj, event):
         """Event filter to handle drag button events"""
         if obj == self.drag_button:
