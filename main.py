@@ -3,14 +3,14 @@ import sys
 import os
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5.QtCore import QTimer
-from ffmpeg import audio
+#from ffmpeg import audio
 from show_model import ShowModel
 from text_window import TextWindow
 from show_text import ShowText
 from gpt_api import ChatGPT
 from gtts import gTTS
-import pyttsx3
-from audiostretchy.stretch import stretch_audio
+#import pyttsx3
+#from audiostretchy.stretch import stretch_audio
 import pygame
 
 live2d.init()
@@ -30,7 +30,7 @@ class MainWindow(QMainWindow):
         self.show_text.updateText("Hello, I'm Open-Source Sama")
 
         self.chat = ChatGPT()
-        self.engine = pyttsx3.init()
+        #self.engine = pyttsx3.init()
 
         # Set up a timer to check the text_window.show_text attribute
         self.timer = QTimer(self)
@@ -47,6 +47,8 @@ class MainWindow(QMainWindow):
             pygame.mixer.Sound('test.wav').play()
             '''self.engine.say(result)
             self.engine.runAndWait()'''
+            if self.show_model.model.IsMotionFinished():
+                self.show_model.model.StartRandomMotion("IDLE", live2d.MotionPriority.FORCE.value)
             self.show_text.updateText(result)
 
 app = QApplication(sys.argv)
