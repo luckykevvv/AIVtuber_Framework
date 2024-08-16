@@ -69,7 +69,8 @@ class ShowModel(QOpenGLWidget):
         self.model.Update()
         
     def timerEvent(self,event):
-        self.update()    
+ 
+        self.update()
 
     def mousePressEvent(self, event: QMouseEvent) -> None:
         self.model.Touch(event.pos().x(), event.pos().y())
@@ -95,3 +96,12 @@ class ShowModel(QOpenGLWidget):
     def mouseReleaseEvent(self, event):
         if event.button() == Qt.LeftButton:
             self.dragging = False
+            
+            
+if __name__ == "__main__":
+    import sys
+    live2d.init()
+    app = QApplication(sys.argv)
+    show_model = ShowModel()
+    show_model.show()
+    sys.exit(app.exec_())

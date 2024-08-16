@@ -85,3 +85,4 @@ class ShowText(QWidget):
         y = screen_height - (screen_height // 4) - (self.height() // 2)  # Adjust y for bottom margin (50 pixels from the bottom)
 
         self.move(QPoint(x, y))
+

@@ -48,7 +48,9 @@ class MainWindow(QMainWindow):
             '''self.engine.say(result)
             self.engine.runAndWait()'''
             if self.show_model.model.IsMotionFinished():
-                self.show_model.model.StartRandomMotion("IDLE", live2d.MotionPriority.FORCE.value)
+                self.show_model.model.StartRandomMotion("Idle", live2d.MotionPriority.NORMAL.value)
+                self.show_model.update() 
+
             self.show_text.updateText(result)
 
 app = QApplication(sys.argv)
