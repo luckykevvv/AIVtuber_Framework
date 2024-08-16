@@ -12,7 +12,7 @@ from show_text import ShowText
 from gpt_api import ChatGPT
 from gtts import gTTS
 from pydub import AudioSegment
-
+from pydub.effects import speedup
 import package.live2d.v3 as live2d
 
 live2d.init()
@@ -32,7 +32,7 @@ class VoiceRecognitionThread(QThread):
             print("Listening...")
 
             # Capture audio using sounddevice
-            duration = 5  # seconds
+            duration = 8  # seconds
             fs = 16000  # Sample rate
             recording = sd.rec(int(duration * fs), samplerate=fs, channels=1, dtype='int16')
             sd.wait()  # Wait until recording is finished
@@ -41,16 +41,12 @@ class VoiceRecognitionThread(QThread):
             audio_data = sr.AudioData(np.array(recording).tobytes(), fs, 2)
 
             # Recognize the audio using Google Web Speech API
-            voice_input = self.recognizer.recognize_google(audio_data)
+            voice_input = self.recognizer.recognize_google(audio_data, language="zh-CN")
             print(f"Recognized voice input: {voice_input}")
             self.result_ready.emit(voice_input)
 
-        except sr.UnknownValueError:
-            self.error_occurred.emit("Sorry, I didn't catch that.")
-        except sr.RequestError:
-            self.error_occurred.emit("Sorry, the speech recognition service is down.")
-        except Exception as e:
-            self.error_occurred.emit(f"An unexpected error occurred: {e}")
+        except:
+            pass
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -102,11 +98,12 @@ class MainWindow(QMainWindow):
         print(error_message)
 
     def play_response(self, text):
-        tts = gTTS(text=text, lang='en', slow=False)
+        tts = gTTS(text=text, lang='zh', slow=False)
         tts.save('./live_2d_model/hiyori_free_en/runtime/sounds/test.mp3')
         
         sound = AudioSegment.from_mp3("live_2d_model/hiyori_free_en/runtime/sounds/test.mp3")
-        sound.export("live_2d_model/hiyori_free_en/runtime/sounds/test.wav", format="wav")
+        final = speedup(sound, playback_speed=1.25) 
+        final.export("live_2d_model/hiyori_free_en/runtime/sounds/test.wav", format="wav")
 
         pygame.mixer.Sound('live_2d_model/hiyori_free_en/runtime/sounds/test.wav').play()
 
