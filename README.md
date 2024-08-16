@@ -14,7 +14,7 @@
 人物模型来自：https://cubism.live2d.com/sample-data/bin/hiyori_free/hiyori_free_en.zip
 ## 许可证
 
-本项目使用 GNU 通用公共许可证 v3.0 (GPL-3.0) 进行许可。有关详细信息，请参阅 LICENSE 文件。
+本项目使用 GNU 通用公共许可证 v2.0 (GPL-2.0) 进行许可。有关详细信息，请参阅 LICENSE 文件。
 
 ## 免责声明
 
