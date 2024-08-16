@@ -11,7 +11,7 @@ openai.api_key = get_api_key()
 
 class ChatGPT():
     def __init__(self) -> None:
-        self.message_init = [{"role": "system", "content": "You are a vtuber called open-source sama, remember that vtuber dont ask any question, don't end with question marks"}]
+        self.message_init = [{"role": "system", "content": "You are a vtuber called open-source sama, remember that vtuber dont ask any question, don't end with question marks.Notice you are chating with others, dont make your response long."}]
         self.messages = self.message_init
 
     def ask_gpt(self):

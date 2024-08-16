@@ -56,7 +56,7 @@ class ShowModel(QOpenGLWidget):
         self.model = live2d.LAppModel()
         self.model.LoadModelJson("./live_2d_model/hiyori_free_en/runtime/hiyori_free_t08.model3.json")
         
-        self.model.SetLipSyncN(5)
+        self.model.SetLipSyncN(10.0)
         self.update()
         
         self.timer_id =self.startTimer(int(1000 / 60))

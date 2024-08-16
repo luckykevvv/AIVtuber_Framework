@@ -9,6 +9,7 @@ from text_window import TextWindow
 from show_text import ShowText
 from gpt_api import ChatGPT
 from gtts import gTTS
+from pydub import AudioSegment
 #import pyttsx3
 #from audiostretchy.stretch import stretch_audio
 import pygame
@@ -42,13 +43,15 @@ class MainWindow(QMainWindow):
         if show:
             result=self.chat.asking(show)
             tts = gTTS(text=result, lang='en',slow=False)
-            tts.save('test.wav')
-            '''stretch_audio("test.wav", "test.wav", ratio=1.1)'''
-            pygame.mixer.Sound('test.wav').play()
-            '''self.engine.say(result)
-            self.engine.runAndWait()'''
+            tts.save('./live_2d_model/hiyori_free_en/runtime/sounds/test.mp3')
+            
+            sound = AudioSegment.from_mp3("live_2d_model/hiyori_free_en/runtime/sounds/test.mp3")
+            sound.export("live_2d_model/hiyori_free_en/runtime/sounds/test.wav", format="wav")
+
+            pygame.mixer.Sound('live_2d_model/hiyori_free_en/runtime/sounds/test.wav').play()
+
             if self.show_model.model.IsMotionFinished():
-                self.show_model.model.StartRandomMotion("Idle", live2d.MotionPriority.NORMAL.value)
+                self.show_model.model.StartMotion("Idle", 0, live2d.MotionPriority.FORCE.value)
                 self.show_model.update() 
 
             self.show_text.updateText(result)

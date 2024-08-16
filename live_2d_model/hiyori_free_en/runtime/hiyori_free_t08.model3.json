@@ -10,13 +10,20 @@
 		"Motions": {
 			"Idle": [
 				{
-					"File": "motion/hiyori_m01.motion3.json"
+					"File": "motion/hiyori_m01.motion3.json",
+					"Sound": "sounds/test.wav"
 				},
 				{
-					"File": "motion/hiyori_m02.motion3.json"
+					"File": "motion/hiyori_m02.motion3.json",
+					"Sound": "sounds/test.wav"
 				},
 				{
-					"File": "motion/hiyori_m05.motion3.json"
+					"File": "motion/hiyori_m05.motion3.json",
+					"Sound": "sounds/test.wav"
+				},
+				{
+					"File": "",
+					"Sound": "sounds/haru_normal_6.wav"
 				}
 			],
 			"Flick": [
