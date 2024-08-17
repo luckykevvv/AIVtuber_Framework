@@ -2,6 +2,7 @@ import package.live2d.v3 as live2d
 from PyQt5.QtGui import QMouseEvent, QCursor
 from PyQt5.QtCore import QTimerEvent, Qt, QPoint
 from PyQt5.QtWidgets import *
+import pygame
 
 class ShowModel(QOpenGLWidget):
     model: live2d.LAppModel
@@ -66,12 +67,19 @@ class ShowModel(QOpenGLWidget):
 
     def paintGL(self) -> None:
         live2d.clearBuffer()
+        self.model.CalcParameters()
         self.model.Update()
         
     def timerEvent(self,event):
- 
+        if self.a == 0:
+           '''self.model.SetLipSyncEnable(True)
+            self.model.Update()
+            pygame.init()
+            pygame.mixer.init()
+            self.model.StartMotion("Idle", 3, live2d.MotionPriority.FORCE.value)
+            pygame.mixer.Sound('live_2d_model/hiyori_free_en/runtime/sounds/test.wav').play()
+            self.a += 1'''
         self.update()
-
     def mousePressEvent(self, event: QMouseEvent) -> None:
         self.model.Touch(event.pos().x(), event.pos().y())
         
@@ -82,7 +90,7 @@ class ShowModel(QOpenGLWidget):
             
         elif event.button() == Qt.RightButton:
             # Show context menu on right-click
-            self.showContextMenu(QCursor.pos())
+            self.showContextMenu(QCursor.pos()) 
 
     def mouseMoveEvent(self, event: QMouseEvent) -> None:
         self.model.Drag(event.pos().x(), event.pos().y())
