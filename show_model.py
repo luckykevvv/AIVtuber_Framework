@@ -60,7 +60,7 @@ class ShowModel(QOpenGLWidget):
         self.model.SetLipSyncN(10.0)
         self.update()
         
-        self.timer_id =self.startTimer(int(1000 / 60))
+        self.timer_id =self.startTimer(int(1000 / 120))
 
     def resizeGL(self, w, h): 
         self.model.Resize(w, h)
