@@ -32,6 +32,7 @@
       ```
       此外，请安装ffmpeg  
 3. **注册openai-api并写进openai_key.json**
+4. **运行main.py**
 
 ## 引用
 本项目的live-2d渲染以及对live-2d模型的操控部分引用自 https://github.com/Arkueid/live2d-py. 
