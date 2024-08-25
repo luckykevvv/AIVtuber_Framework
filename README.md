@@ -29,7 +29,8 @@
 2. **安装依赖项**
       ```bash
       pip install -r requirements.txt
-此外，请安装ffmpeg
+      ```
+      此外，请安装ffmpeg  
 3. **注册openai-api并写进openai_key.json**
 
 ## 引用
