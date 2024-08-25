@@ -26,6 +26,12 @@
    ```bash
    git clone https://github.com/luckykevvv/Desktop_Pet_Structure.git
 
+2. **安装依赖项**
+      ```bash
+      pip install -r requirements.txt
+此外，请安装ffmpeg
+3. **注册openai-api并写进openai_key.json**
+
 ## 引用
 本项目的live-2d渲染以及对live-2d模型的操控部分引用自 https://github.com/Arkueid/live2d-py. 
 人物模型来自：https://cubism.live2d.com/sample-data/bin/hiyori_free/hiyori_free_en.zip
