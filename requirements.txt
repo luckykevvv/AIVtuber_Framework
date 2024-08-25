@@ -1,0 +1,9 @@
+gTTS==2.5.3
+mediapipe==0.10.14
+numpy==2.1.0
+openai==1.42.0
+opencv_python==4.10.0.84
+pydub==0.25.1
+pygame==2.6.0
+PyQt5==5.15.11
+PyQt5_sip==12.15.0
