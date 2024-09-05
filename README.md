@@ -3,12 +3,12 @@
 AIVtuber Framework. The character models are based on Live2D, and TTS uses Google's gTTS library. The current dialog API is calling GPT4o-mini. The way to interact with the voice model is through both a dialog box and speech recognition. The plan is to first adapt for Bilibili, followed by Twitch.
 Considering that most computers are now 64-bit, the Live2D model will not be adapted for v2.  
 
-   Features:
+   Features:  
 
-   Direct voice interaction with the language model
-   Multilingual support
-   Conversations are played back through TTS
-   Lip sync between the language model's voice and the Live2D model
+   Direct voice interaction with the language model  
+   Multilingual support  
+   Conversations are played back through TTS  
+   Lip sync between the language model's voice and the Live2D model  
 
 ## Demo
 Default starting screen  
@@ -35,7 +35,7 @@ In conversation
 4. **Run main.py**
 
 ## Credits
-The Live2D rendering and manipulation part of this project is based on https://github.com/Arkueid/live2d-py.
+The Live2D rendering and manipulation part of this project is based on https://github.com/Arkueid/live2d-py.  
 Character model from: https://cubism.live2d.com/sample-data/bin/hiyori_free/hiyori_free_en.zip
 ## License
 
