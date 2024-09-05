@@ -1,3 +1,56 @@
+# AIVtuber Framework
+
+AIVtuber Framework. The character models are based on Live2D, and TTS uses Google's gTTS library. The current dialog API is calling GPT4o-mini. The way to interact with the voice model is through both a dialog box and speech recognition. The plan is to first adapt for Bilibili, followed by Twitch.
+Considering that most computers are now 64-bit, the Live2D model will not be adapted for v2.  
+
+   Features:
+
+   Direct voice interaction with the language model
+   Multilingual support
+   Conversations are played back through TTS
+   Lip sync between the language model's voice and the Live2D model
+
+## Demo
+Default starting screen  
+![image](https://github.com/user-attachments/assets/b767b169-9b6e-41d5-be05-f1093d1f974c)
+
+In conversation
+![image](https://github.com/user-attachments/assets/e2162c3e-54bc-4100-8f9d-f6d8bedcefa3)
+
+
+
+## Installation
+
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/luckykevvv/Desktop_Pet_Structure.git
+
+2. **Install dependencies**
+      ```bash
+      pip install -r requirements.txt
+      ```
+      Additionally, please install ffmpeg. 
+3. **Register for OpenAI API and write your key in openai_key.json**
+4. **Run main.py**
+
+## Credits
+The Live2D rendering and manipulation part of this project is based on https://github.com/Arkueid/live2d-py.
+Character model from: https://cubism.live2d.com/sample-data/bin/hiyori_free/hiyori_free_en.zip
+## License
+
+This project is licensed under the GNU General Public License v2.0 (GPL-2.0). For more details, please refer to the LICENSE file.
+
+## Disclaimer
+
+This project is open-source software, and its features and services are provided for learning and reference purposes only. There is no guarantee that it will be suitable for specific purposes. When using this framework, you assume all related risks.
+
+
+
+
+
+
+
 # 桌宠框架
 
 ~~欢迎使用桌宠框架！这是一个用于创建桌面宠物的开源框架, 桌宠基于live-2d。你可以利用这个框架来开发各种有趣和互动的桌面宠物程序，增强你的桌面体验。~~
